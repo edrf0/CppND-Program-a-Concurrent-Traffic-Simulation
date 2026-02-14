@@ -18,7 +18,8 @@ class TrafficObject
 public:
     // constructor / desctructor
     TrafficObject();
-    ~TrafficObject();
+
+    virtual ~TrafficObject();
 
     // getter and setter
     int getID() { return _id; }
