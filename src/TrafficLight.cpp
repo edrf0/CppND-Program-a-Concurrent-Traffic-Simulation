@@ -3,21 +3,19 @@
 #include "TrafficLight.h"
 
 /* Implementation of class "MessageQueue" */
-
-
-template <typename T>
+template<class T>
 T MessageQueue<T>::receive()
 {
     std::unique_lock<std::mutex> uLock(_mutex);
     _condition.wait(uLock, [this] {
         return !_queue.empty();
     });
-    T message = std::move(_queue.back());
+    TrafficLightPhase message = std::move(_queue.back());
     _queue.pop_back();
     return message;
 }
 
-template <typename T>
+template<class T>
 void MessageQueue<T>::send(T &&msg)
 {
     {
@@ -71,7 +69,7 @@ void TrafficLight::simulate()
 // virtual function which is executed in a thread
 void TrafficLight::cycleThroughPhases()
 {
-    std::cout << "TrafficLight thread STARTED for ID: " << _id << std::endl;
+    //std::cout << "TrafficLight thread STARTED for ID: " << _id << std::endl;
 
     std::mt19937_64 engine(std::random_device{}());
     std::uniform_real_distribution<double> distribution(4.0, 6.0);
@@ -93,5 +91,5 @@ void TrafficLight::cycleThroughPhases()
             startTime = std::chrono::system_clock::now();
         }
     }
-    std::cout << "TrafficLight thread FINISHED for ID: " << _id << std::endl;
+    //std::cout << "TrafficLight thread FINISHED for ID: " << _id << std::endl;
 }

@@ -14,14 +14,15 @@ enum TrafficLightPhase {
     green
 };
 
-template <class T>
+template<class T>
 class MessageQueue
 {
 public:
     void send(T &&phase);
     T receive();
-private:
+protected:
     std::deque<TrafficLightPhase> _queue;
+private:
     std::mutex _mutex;
     std::condition_variable _condition;
 };
