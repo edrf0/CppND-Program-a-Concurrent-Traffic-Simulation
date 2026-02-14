@@ -31,7 +31,7 @@ class TrafficLight : public TrafficObject
 public:
     // constructor / destructor
     TrafficLight();
-    ~TrafficLight() override = default;
+    ~TrafficLight() override;
     // getters / setters
     TrafficLightPhase getCurrentPhase();
     void setCurrentPhase(TrafficLightPhase phase);

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <thread>
+#include <unistd.h>
 #include <vector>
 
 #include "Vehicle.h"
@@ -152,8 +153,10 @@ int main()
     });
 
     // draw all objects in vector
-    Graphics *graphics = new Graphics();
-    graphics->setBgFilename(backgroundImg);
-    graphics->setTrafficObjects(trafficObjects);
-    graphics->simulate();
+    Graphics graphics;
+    graphics.setBgFilename(backgroundImg);
+    graphics.setTrafficObjects(trafficObjects);
+    graphics.simulate();
+
+    //_exit(0);
 }

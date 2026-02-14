@@ -15,6 +15,11 @@ void Graphics::simulate()
 
         // update graphics
         this->drawTrafficObjects();
+
+        int key = cv::waitKey(1);
+        if (key == 27 || cv::getWindowProperty(_windowName, cv::WND_PROP_VISIBLE) < 1) {
+            break;
+        }
     }
 }
 

@@ -43,7 +43,7 @@ void Vehicle::drive()
 
     // init stop watch
     lastUpdate = std::chrono::system_clock::now();
-    while (true)
+    while (_isSimulationRunning)
     {
         // sleep at every iteration to reduce CPU usage
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
@@ -77,10 +77,12 @@ void Vehicle::drive()
             if (completion >= 0.9 && !hasEnteredIntersection)
             {
                 // request entry to the current intersection (using async)
-                auto ftrEntryGranted = std::async(&Intersection::addVehicleToQueue, _currDestination, get_shared_this());
+                //auto ftrEntryGranted = std::async(&Intersection::addVehicleToQueue, _currDestination, get_shared_this());
 
                 // wait until entry has been granted
-                ftrEntryGranted.get();
+                //ftrEntryGranted.get();
+
+                _currDestination->addVehicleToQueue(get_shared_this());
 
                 // slow down and set intersection flag
                 _speed /= 10.0;
@@ -125,5 +127,6 @@ void Vehicle::drive()
             // reset stop watch for next cycle
             lastUpdate = std::chrono::system_clock::now();
         }
+        if (!_isSimulationRunning) break;
     } // eof simulation loop
 }

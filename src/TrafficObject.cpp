@@ -30,7 +30,10 @@ TrafficObject::~TrafficObject()
 {
     _isSimulationRunning = false;
     // set up thread barrier before this object is destroyed
-    std::for_each(threads.begin(), threads.end(), [](std::thread &t) {
-        t.join();
-    });
+    // std::for_each(threads.begin(), threads.end(), [](std::thread &t) {
+    //     t.join();
+    // });
+    for (auto &t:threads) {
+        if (t.joinable()) t.join();
+    }
 }
