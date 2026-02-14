@@ -9,7 +9,7 @@ class Intersection;
 class Street : public TrafficObject, public std::enable_shared_from_this<Street>
 {
 public:
-    // constructor / desctructor
+    // constructor / destructor
     Street();
 
     // getters / setters
