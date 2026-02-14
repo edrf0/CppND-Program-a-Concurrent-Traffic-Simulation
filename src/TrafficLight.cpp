@@ -67,7 +67,7 @@ void TrafficLight::cycleThroughPhases()
     double elapsedTime{};
     std::chrono::system_clock::time_point endTime{};
     auto startTime = std::chrono::system_clock::now();
-    while (true) {
+    while (_isSimulationRunning) {
         endTime = std::chrono::system_clock::now();
         elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
         if (elapsedTime >= cycleDuration) {
